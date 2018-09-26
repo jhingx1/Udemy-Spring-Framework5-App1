@@ -18,6 +18,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
+	<!-- Para que se lean los recursos, en nuestras paginas JSP -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 </beans>
