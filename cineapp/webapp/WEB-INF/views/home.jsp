@@ -36,7 +36,7 @@
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">Lista de Peliculas</div>
-
+			<h2>Creando bracj</h2>
 
 			<div class="panel-body">
 				<table class="table table-striped table-bordered table-hover">
