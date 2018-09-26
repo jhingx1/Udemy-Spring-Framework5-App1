@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- Tag para dar formato -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
@@ -11,12 +12,21 @@
 
 <!-- Bootrap -->
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Ruta relativa nuestros recursos -->
+<spring:url value="/resources" var="urlPublic" />
 
 </head>
 <body>
-<h1>Bienvenido a la Pagina Principal</h1>
-<%--
+
+
+
+	<h1>Bienvenido a la Pagina Principal</h1>
+	<%--
 	<h1>Lista de Peliculas</h1>
 	<ol>
 		<c:forEach items="${peliculas}" var="pelicula">
@@ -51,9 +61,22 @@
 								<td>${pelicula.duracion}</td>
 								<td>${pelicula.clasificacion}</td>
 								<td>${pelicula.genero}</td>
-								<td>${pelicula.imagen}</td>
-								<td>${pelicula.fechaEstreno}</td>
-								<td>${pelicula.estatus}</td>	
+								<!-- <td>${pelicula.imagen}</td> -->
+								<td><img src="${urlPublic}/images/${pelicula.imagen}"
+									width="80" height="100" /></td>
+								<!-- Formato fecha jstl -->
+								<td><fmt:formatDate value="${pelicula.fechaEstreno}"
+										pattern="dd-MM-yyyy" /></td>
+								<!-- Incluir un condicional -->
+								<td><c:choose>
+										<c:when test="${pelicula.estatus == 'Activa'}">
+											<span class="label label-success">ACTIVA</span>
+										</c:when>
+										<c:otherwise>
+											<span class="label label-danger">INACTIVA</span>
+										</c:otherwise>
+									</c:choose>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

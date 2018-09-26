@@ -85,7 +85,7 @@ public class HomeController {
 			pelicula3.setGenero("Thriller");
 			pelicula3.setFechaEstreno(formatter.parse("28-05-2018"));
 			pelicula3.setImagen("contratiempo.png");
-			/*
+			
 			Pelicula pelicula4 = new Pelicula();
 			pelicula4.setId(4);
 			pelicula4.setTitulo("Kong La isla Calavera");
@@ -95,7 +95,7 @@ public class HomeController {
 			pelicula4.setFechaEstreno(formatter.parse("06-06-2018"));
 			pelicula4.setImagen("kong.png");
 			pelicula4.setEstatus("Inactiva");
-
+			/*	
 			// Agregamos una pelicula mas
 
 			Pelicula pelicula5 = new Pelicula();
@@ -112,7 +112,7 @@ public class HomeController {
 			lista.add(pelicula1);
 			lista.add(pelicula2);
 			lista.add(pelicula3);
-			//lista.add(pelicula4);
+			lista.add(pelicula4);
 			//lista.add(pelicula5);
 
 			return lista;
