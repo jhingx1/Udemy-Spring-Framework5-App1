@@ -22,10 +22,9 @@
 
 </head>
 <body>
-
-
-
+	<!--  
 	<h1>Bienvenido a la Pagina Principal</h1>
+	-->
 	<%--
 	<h1>Lista de Peliculas</h1>
 	<ol>
