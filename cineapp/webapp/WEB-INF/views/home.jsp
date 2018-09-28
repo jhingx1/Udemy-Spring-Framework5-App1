@@ -97,53 +97,20 @@
       <div class="container marketing">
 
         <div class="row">
-
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img class="img-rounded" src="${urlPublic}/images/estreno1.png" alt="Generic placeholder image" width="150" height="200">
-            <h4>En este Rincón del Mundo</h4>
-            <h4>
-              <span class="label label-default">A</span>
-              <span class="label label-default">130 min</span>
-              <span class="label label-default">Drama</span>
-            </h4>         
-            <p><a class="btn btn-sm btn-primary" href="#" role="button">Consulta Horarios &raquo;</a></p>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img class="img-rounded" src="${urlPublic}/images/estreno2.png" alt="Generic placeholder image" width="150" height="200">
-            <h4>Logan: Wolverine</h4>
-            <h4>
-              <span class="label label-default">C</span>
-              <span class="label label-default">135 min</span>
-              <span class="label label-default">Acción</span>
-            </h4>         
-            <p><a class="btn btn-sm btn-primary" href="#" role="button">Consulta Horarios &raquo;</a></p>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img class="img-rounded" src="${urlPublic}/images/estreno3.png" alt="Generic placeholder image" width="150" height="200">
-            <h4>Fragmentado</h4>
-            <h4>
-              <span class="label label-default">B15</span>
-              <span class="label label-default">118 min</span>
-              <span class="label label-default">Thriller</span>
-            </h4>         
-            <p><a class="btn btn-sm btn-primary" href="#" role="button">Consulta Horarios &raquo;</a></p>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <img class="img-rounded" src="${urlPublic}/images/estreno4.png" alt="Generic placeholder image" width="150" height="200">
-            <h4>Kong La Isla Calavera</h4>
-            <h4>
-              <span class="label label-default">B</span>
-              <span class="label label-default">118 min</span>
-              <span class="label label-default">Acción y aventura</span>
-            </h4>         
-            <p><a class="btn btn-sm btn-primary" href="#" role="button">Consulta Horarios &raquo;</a></p>
-          </div>
-
+			<c:forEach items="${peliculas}" var="pelicula">
+	          <div class="col-xs-12 col-sm-6 col-md-3">
+	            <img class="img-rounded" src="${urlPublic}/images/${pelicula.imagen}" alt="Generic placeholder image" width="150" height="200">
+	            <h4>${pelicula.titulo}</h4>
+	            <h4>
+	              <span class="label label-default">${pelicula.clasificacion}</span>
+	              <span class="label label-default">${pelicula.duracion} min</span>
+	              <span class="label label-default">${pelicula.genero}</span>
+	            </h4>         
+	            <p><a class="btn btn-sm btn-primary" href="#" role="button">Consulta Horarios &raquo;</a></p>
+	          </div>
+			</c:forEach>
         </div>
-
+		<!-- Noticias y Novedades -->
         <div class="page-header">
           <h2 class="text text-center"><span class="label label-success">Noticias y novedades</span></h2>
         </div>
