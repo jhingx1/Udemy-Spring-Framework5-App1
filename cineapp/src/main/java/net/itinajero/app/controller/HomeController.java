@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.itinajero.app.model.Pelicula;
+import net.itinajero.app.util.Utileria;
 
 @Controller
 public class HomeController {
@@ -36,11 +37,14 @@ public class HomeController {
 	//Rederiza hacia la pagina por default - home.jsp
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
+		
+		List<String> listaFecha = Utileria.getNextDays(4);//metodo estatico
+		//System.out.println(listaFecha);
 
 		List<Pelicula> peliculas = getLista();
 		//enviaremos la hora actual del sistemas hacia la pagina home
-		model.addAttribute("fechaBusqueda", dateFormat.format(new Date())); //fecha actual
-		
+		model.addAttribute("fechas", listaFecha);
+		model.addAttribute("fechaBusqueda", dateFormat.format(new Date())); //fecha actual		
 		model.addAttribute("peliculas", peliculas);
 		
 		
