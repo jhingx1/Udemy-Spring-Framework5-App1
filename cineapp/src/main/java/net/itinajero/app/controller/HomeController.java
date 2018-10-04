@@ -28,7 +28,18 @@ public class HomeController {
 	
 	//metodo para recibir peticion tipo post
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String buscar(@RequestParam("fecha") String fecha) {
+	public String buscar(@RequestParam("fecha") String fecha, Model model) {
+		
+		List<String> listaFecha = Utileria.getNextDays(4);//metodo estatico, metodo que debuelve 5 fechas.
+		//System.out.println(listaFecha);
+
+		List<Pelicula> peliculas = getLista();
+		//enviaremos la fecha actual del sistemas hacia la pagina home
+		model.addAttribute("fechas", listaFecha);
+		//fecha para consultar horarios, toma la fecha actual del sistema.
+		model.addAttribute("fechaBusqueda", fecha); //fecha que selecciono al momento de filtrar.		
+		model.addAttribute("peliculas", peliculas);
+		
 		System.out.println("Buscando todas las peliculas en exhibicion para la fecha : " + fecha);
 		return "home";
 	}
