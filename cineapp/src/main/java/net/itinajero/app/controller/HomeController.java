@@ -18,13 +18,21 @@ import net.itinajero.app.util.Utileria;
 @Controller
 public class HomeController {
 	
-	//fecha, para enviarla
+	//fecha, para enviarla por la url
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String goHome() {
 		return "home";
 	}
+	
+	//metodo para recibir peticion tipo post
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String buscar(@RequestParam("fecha") String fecha) {
+		System.out.println("Buscando todas las peliculas en exhibicion para la fecha : " + fecha);
+		return "home";
+	}
+	
 	/*
 	 * @RequestMapping(value="/",method=RequestMethod.GET) public String
 	 * mostrarPrincipal(Model model) { //tener en cuenta los scopes. List<String>
@@ -38,12 +46,13 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		
-		List<String> listaFecha = Utileria.getNextDays(4);//metodo estatico
+		List<String> listaFecha = Utileria.getNextDays(4);//metodo estatico, metodo que debuelve 5 fechas.
 		//System.out.println(listaFecha);
 
 		List<Pelicula> peliculas = getLista();
-		//enviaremos la hora actual del sistemas hacia la pagina home
+		//enviaremos la fecha actual del sistemas hacia la pagina home
 		model.addAttribute("fechas", listaFecha);
+		//fecha para consultar horarios, toma la fecha actual del sistema.
 		model.addAttribute("fechaBusqueda", dateFormat.format(new Date())); //fecha actual		
 		model.addAttribute("peliculas", peliculas);
 		
