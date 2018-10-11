@@ -53,6 +53,7 @@ public class HomeController {
 	 * 
 	 * return "home"; }
 	 */
+	
 	//Rederiza hacia la pagina por default - home.jsp
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {

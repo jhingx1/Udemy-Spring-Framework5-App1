@@ -25,11 +25,12 @@
 		<h3 class="blog-title">
 			<span class="label label-success">Datos de la Noticia</span>
 		</h3>
-		
+		<!-- La ruta hacia el metodo guardar -->
 		<spring:url value="/noticias/save" var="urlForm"></spring:url>
+		<!--  Es formulario va hacia el controlador -->
 		<form action="${urlForm}" method="post">
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-6">	
 					<div class="form-group">
 						<label for="titulo">Titulo</label> <input type="text"
 							class="form-control" name="titulo" id="titulo"
@@ -38,7 +39,8 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="estatus">Estatus</label> <select id="estatus"
+						<label for="estatus">Estatus</label> 
+						<select id="estatus"
 							name="estatus" class="form-control">
 							<option value="Activa">Activa</option>
 							<option value="Inactiva">Inactiva</option>
@@ -49,9 +51,12 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
+						<!-- Hay que pasarle el for=detalle, hacia el tinymce
+						osea el formulario tipo word.-->
 						<label for="detalle">Detalles</label>
 						<textarea class="form-control" name="detalle" id="detalle"
-							rows="10"></textarea>
+							rows="10">
+						</textarea>
 					</div>
 				</div>
 			</div>
