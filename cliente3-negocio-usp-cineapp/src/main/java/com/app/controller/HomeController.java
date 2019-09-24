@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,11 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.model.Pelicula;
+import com.app.util.Utileria;
 
 @Controller
 public class HomeController {
+	
+	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 	
 	@RequestMapping(value="/home",method=RequestMethod.GET)
 	public String goHome() {
@@ -23,10 +28,17 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
-	public String mostrarDetalle(Model model,@PathVariable("id") int idPelicula) {
+	//@RequestMapping(value="/detail/{id}/{fecha}",method=RequestMethod.GET)
+	//public String mostrarDetalle(Model model,@PathVariable("id") int idPelicula,@PathVariable("fecha") String fecha)
+	
+	@RequestMapping(value="/detail",method=RequestMethod.GET)
+	public String mostrarDetalle(Model model,@RequestParam("idMovie") int idPelicula,
+			@RequestParam("fecha") String fecha) {
 		
 		System.out.println("idPelicula : " + idPelicula);
+		System.out.println("Buscando horarios pelicula : " + fecha);
+		
+		//TODO buscar en la DB los horarios
 		
 		String tituloPelicula = "Rapidos y Furiosos";
 		int duracion = 136;
@@ -44,9 +56,17 @@ public class HomeController {
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		
+		//para las fechas
+		List<String> listaFechas = Utileria.getNextDays(4); //por ser un metodo statico
+		System.out.println(listaFechas);
+		
 		List<Pelicula> peliculas = getLista();
 		
 		model.addAttribute("peliculas", peliculas);
+		model.addAttribute("fechaBusqueda", dateformat.format(new Date()));
+		
+		//agregando las lista de fechas al modelo
+		model.addAttribute("fechas", listaFechas);
 		
 		return "home";
 	}
