@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,8 +23,11 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value="/detail")
-	public String mostrarDetalle(Model model) {
+	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)
+	public String mostrarDetalle(Model model,@PathVariable("id") int idPelicula) {
+		
+		System.out.println("idPelicula : " + idPelicula);
+		
 		String tituloPelicula = "Rapidos y Furiosos";
 		int duracion = 136;
 		double precioEntrada = 50;
@@ -94,7 +98,7 @@ public class HomeController {
 			pelicula4.setFechaEstreno(formatter.parse("06-06-2018"));
 			pelicula4.setImagen("kong.png");
 			pelicula4.setEstatus("Inactiva");
-			/*	
+			
 			// Agregamos una pelicula mas
 
 			Pelicula pelicula5 = new Pelicula();
@@ -106,13 +110,13 @@ public class HomeController {
 			pelicula5.setFechaEstreno(formatter.parse("10-06-2018"));
 			pelicula5.setImagen("estreno5.png");
 			pelicula5.setEstatus("Activa");
-	*/
+	
 			// anadiendo a la lista
 			lista.add(pelicula1);
 			lista.add(pelicula2);
 			lista.add(pelicula3);
 			lista.add(pelicula4);
-			//lista.add(pelicula5);
+			lista.add(pelicula5);
 
 			return lista;
 
