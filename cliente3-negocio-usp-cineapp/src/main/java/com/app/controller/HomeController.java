@@ -53,6 +53,23 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value="/search",method=RequestMethod.POST)
+	public String buscar(@RequestParam("fecha") String fecha,Model model) {
+		
+		System.out.println("Buscando fecha peliculas:" + fecha);
+		
+		//para las fechas
+		List<String> listaFechas = Utileria.getNextDays(4); 		
+		List<Pelicula> peliculas = getLista();
+		
+		model.addAttribute("peliculas", peliculas);
+		model.addAttribute("fechaBusqueda", fecha); //Mostrar la fecha seleccionada		
+		//agregando las lista de fechas al modelo
+		model.addAttribute("fechas", listaFechas);
+		
+		return "home";
+	}
+	
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		
