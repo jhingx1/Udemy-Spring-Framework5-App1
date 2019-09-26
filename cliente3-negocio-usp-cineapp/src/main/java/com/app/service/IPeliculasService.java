@@ -11,5 +11,8 @@ public interface IPeliculasService {
 	
 	//Para buscar la pelicula por id
 	Pelicula buscarPorId(int idPelicula);
+	
+	//metodo para insertar
+	void insertar(Pelicula pelicula);
 
 }

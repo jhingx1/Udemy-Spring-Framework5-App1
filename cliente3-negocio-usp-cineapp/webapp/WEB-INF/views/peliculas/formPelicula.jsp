@@ -155,7 +155,7 @@
       <hr class="featurette-divider">
 
      <!-- FOOTER -->
-      <jsp:include page="../includes/footer.jsp"></jsp:include>
+     <jsp:include page="../includes/footer.jsp"></jsp:include>
 
     </div> <!-- /container -->
 
