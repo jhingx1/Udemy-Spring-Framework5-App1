@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.model.Banner;
 import com.app.model.Pelicula;
+import com.app.service.IBannersService;
 import com.app.service.IPeliculasService;
 import com.app.util.Utileria;
 
@@ -22,6 +24,8 @@ public class HomeController {
 	
 	@Autowired //para inyectar el servicio
 	private IPeliculasService servicePeliculas;
+	@Autowired
+	private IBannersService serviceBanners;
 	
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 	
@@ -70,10 +74,17 @@ public class HomeController {
 		List<String> listaFechas = Utileria.getNextDays(4); 		
 		List<Pelicula> peliculas = servicePeliculas.buscarTodas();
 		
+		//banners - Para la pagina principal
+		List<Banner> banners = serviceBanners.buscarTodos();
+		
+		
 		model.addAttribute("peliculas", peliculas);
 		model.addAttribute("fechaBusqueda", fecha); //Mostrar la fecha seleccionada		
 		//agregando las lista de fechas al modelo
 		model.addAttribute("fechas", listaFechas);
+		
+		//banners-pagina principal
+		model.addAttribute("banners", banners);
 		
 		return "home";
 	}
@@ -85,14 +96,17 @@ public class HomeController {
 		List<String> listaFechas = Utileria.getNextDays(4); //por ser un metodo statico
 		System.out.println(listaFechas);
 		
-		List<Pelicula> peliculas = servicePeliculas.buscarTodas();
+		List<Pelicula> peliculas = servicePeliculas.buscarTodas();				
 		
-		model.addAttribute("peliculas", peliculas);
-		model.addAttribute("fechaBusqueda", dateformat.format(new Date()));
+		model.addAttribute("peliculas", peliculas);		
+		model.addAttribute("fechaBusqueda", dateformat.format(new Date()));		
 		
 		//agregando las lista de fechas al modelo
 		model.addAttribute("fechas", listaFechas);
 		
+		//banners
+		model.addAttribute("banners", serviceBanners.buscarTodos());
+				
 		return "home";
 	}
 	

@@ -80,7 +80,7 @@
           
       <hr class="featurette-divider">
 
-      <!-- FOOTER -->
+     <!-- FOOTER -->
      <jsp:include page="../includes/footer.jsp"></jsp:include>
 
     </div> <!-- /container -->

@@ -19,6 +19,9 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />	
+	
 	<!-- Para que se lean los recursos, en nuestras paginas JSP -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 

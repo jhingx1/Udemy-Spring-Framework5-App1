@@ -31,7 +31,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
 			pelicula1.setDuracion(120);
 			pelicula1.setClasificacion("B");
 			pelicula1.setGenero("Aventura");
-			pelicula1.setFechaEstreno(formatter.parse("02-05-2018"));
+			pelicula1.setFechaEstreno(formatter.parse("02-05-2019"));
 			// imgen = "cinema.png"
 			// estatus = "Activa"
 
@@ -41,7 +41,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
 			pelicula2.setDuracion(132);
 			pelicula2.setClasificacion("A");
 			pelicula2.setGenero("Infantil");
-			pelicula2.setFechaEstreno(formatter.parse("02-05-2018"));
+			pelicula2.setFechaEstreno(formatter.parse("02-05-2019"));
 			pelicula2.setImagen("bella.png");
 
 			Pelicula pelicula3 = new Pelicula();
@@ -50,7 +50,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
 			pelicula3.setDuracion(106);
 			pelicula3.setClasificacion("B");
 			pelicula3.setGenero("Thriller");
-			pelicula3.setFechaEstreno(formatter.parse("28-05-2018"));
+			pelicula3.setFechaEstreno(formatter.parse("28-05-2019"));
 			pelicula3.setImagen("contratiempo.png");
 			
 			Pelicula pelicula4 = new Pelicula();
@@ -59,7 +59,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
 			pelicula4.setDuracion(118);
 			pelicula4.setClasificacion("B");
 			pelicula4.setGenero("Accion y Aventura");
-			pelicula4.setFechaEstreno(formatter.parse("06-06-2018"));
+			pelicula4.setFechaEstreno(formatter.parse("06-06-2019"));
 			pelicula4.setImagen("kong.png");
 			pelicula4.setEstatus("Inactiva");
 			
@@ -71,7 +71,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
 			pelicula5.setDuracion(104);
 			pelicula5.setClasificacion("B");
 			pelicula5.setGenero("Drama");
-			pelicula5.setFechaEstreno(formatter.parse("10-06-2018"));
+			pelicula5.setFechaEstreno(formatter.parse("10-06-2019"));
 			pelicula5.setImagen("estreno5.png");
 			pelicula5.setEstatus("Activa");
 	
