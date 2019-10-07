@@ -34,7 +34,9 @@ public class PeliculaController {
 	private PeliculasServiceImpl servicePeliculas;	
 	
 	@GetMapping(value="/create")
-	public String crear(@ModelAttribute Pelicula pelicula) {
+	public String crear(@ModelAttribute Pelicula pelicula,Model model) {
+		
+		model.addAttribute("generos",servicePeliculas.buscarGeneros());
 		return "peliculas/formPelicula";
 	}
 	

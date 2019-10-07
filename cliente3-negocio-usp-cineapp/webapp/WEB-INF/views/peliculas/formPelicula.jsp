@@ -44,12 +44,23 @@
 				</ul>
 			</div>
 		</spring:hasBindErrors>
-
+		
+		${pelicula}
       <form:form action="${urlForm}" method="post" enctype="multipart/form-data" modelAttribute="pelicula">
+      
+      	<div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <img class="img-rounded" src="${urlPublic}/images/${pelicula.imagen}" title="Imagen actual de la pelicula" width="150" height="200">
+            </div>  
+          </div>
+         </div>
+      
         <div class="row">
           <div class="col-sm-3">
             <div class="form-group">
               <label for="titulo">Título</label>
+              <form:hidden path="id"/>
               <form:input type="text" class="form-control" path="titulo" id="titulo" required="required" />
             </div>  
           </div>
@@ -71,18 +82,23 @@
           </div>
           <div class="col-sm-3">
             <div class="form-group">
-              <label for="genero" class="control-label">Genero</label>              
-              <form:select id="genero" path="genero" class="form-control">
-                <form:option value="Accion">Accion</form:option>
-                <form:option value="Aventura">Aventura </form:option>
-                <form:option value="Clasicas">Clasicas</form:option>                  
-                <form:option value="Comedia Romantica">Comedia Romantica</form:option>                  
-                <form:option value="Drama">Drama</form:option>                  
-                <form:option value="Terror">Terror</form:option>                  
-                <form:option value="Infantil">Infantil</form:option>                  
-                <form:option value="Accion y Aventura">Accion y Aventura</form:option>                  
-                <form:option value="Romantica">Romantica</form:option>                  
-              </form:select>             
+              <label for="genero" class="control-label">Genero</label>  
+                          
+<%--               <form:select id="genero" path="genero" class="form-control"> --%>
+<%--                 <form:option value="Accion">Accion</form:option> --%>
+<%--                 <form:option value="Aventura">Aventura </form:option> --%>
+<%--                 <form:option value="Clasicas">Clasicas</form:option>                   --%>
+<%--                 <form:option value="Comedia Romantica">Comedia Romantica</form:option>                   --%>
+<%--                 <form:option value="Drama">Drama</form:option>                   --%>
+<%--                 <form:option value="Terror">Terror</form:option>                   --%>
+<%--                 <form:option value="Infantil">Infantil</form:option>                   --%>
+<%--                 <form:option value="Accion y Aventura">Accion y Aventura</form:option>                   --%>
+<%--                 <form:option value="Romantica">Romantica</form:option>                   --%>
+<%--               </form:select>  --%>
+              
+              
+              <form:select id="genero" path="genero" class="form-control" items="${generos}" />
+                      
             </div> 
           </div>         
         </div>
@@ -107,6 +123,7 @@
           <div class="col-sm-3">
             <div class="form-group">
               <label for="imagen">Imagen</label>
+              <form:hidden path="imagen"/>
               <input type="file" id="archivoImagen" name="archivoImagen" />
               <p class="help-block">Imagen de la pelicula</p>
             </div> 
@@ -114,40 +131,40 @@
         </div>
 
          
-<!--         <div class="page-header"> -->
-<!--             <h3 class="blog-title"><span class="label label-success">Detalles</span></h3> -->
-<!--         </div> -->
+        <div class="page-header">
+            <h3 class="blog-title"><span class="label label-success">Detalles</span></h3>
+        </div>
 
-<!--         <div class="row"> -->
-<!--           <div class="col-sm-3"> -->
-<!--             <div class="form-group"> -->
-<!--               <label for="director">Director</label> -->
-<!--               <input type="text" class="form-control" name="director" id="director" required="required" /> -->
-<!--             </div>   -->
-<!--           </div> -->
-<!--           <div class="col-sm-3"> -->
-<!--             <div class="form-group"> -->
-<!--               <label for="actores">Actores</label> -->
-<!--               <input type="text" class="form-control" name="actores" id="actores" required="required" /> -->
-<!--             </div>   -->
-<!--           </div> -->
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="director">Director</label>
+              <form:input type="text" class="form-control" path="detalle.director" id="director" required="required" />
+            </div>  
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="actores">Actores</label>
+              <form:input type="text" class="form-control" path="detalle.actores" id="actores" required="required" />
+            </div>  
+          </div>
 
-<!--           <div class="col-sm-6"> -->
-<!--             <div class="form-group"> -->
-<!--               <label for="trailer">URL del Trailer (Youtube)</label> -->
-<!--               <input type="text" class="form-control" name="trailer" id="trailer" placeholder="URL completa del video de YOUTUBE" required="required" /> -->
-<!--             </div>   -->
-<!--           </div>  -->
-<!--         </div>  -->
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="trailer">URL del Trailer (Youtube)</label>
+              <form:input type="text" class="form-control" path="detalle.trailer" id="trailer" placeholder="URL completa del video de YOUTUBE" required="required" />
+            </div>  
+          </div> 
+        </div> 
 
-<!--         <div class="row"> -->
-<!--           <div class="col-sm-6"> -->
-<!--             <div class="form-group"> -->
-<!--               <label for="sinopsis">Sinopsis</label> -->
-<!--               <textarea class="form-control" rows="5" name="sinopsis" id="sinopsis"></textarea> -->
-<!--             </div>  -->
-<!--           </div>  -->
-<!--         </div> -->
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="sinopsis">Sinopsis</label>
+              <form:textarea class="form-control" rows="5" path="detalle.sinopsis" id="sinopsis"></form:textarea>
+            </div> 
+          </div> 
+        </div>
         
         
         <button type="submit" class="btn btn-danger" >Guardar</button>

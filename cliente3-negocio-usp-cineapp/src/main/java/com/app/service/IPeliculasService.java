@@ -14,5 +14,8 @@ public interface IPeliculasService {
 	
 	//metodo para insertar
 	void insertar(Pelicula pelicula);
+	
+	//Para las lista de generos
+	List<String> buscarGeneros();
 
 }
