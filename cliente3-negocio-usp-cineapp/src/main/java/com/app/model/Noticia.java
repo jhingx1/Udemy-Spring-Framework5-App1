@@ -2,8 +2,18 @@ package com.app.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Noticias") //indica el nombre de la tabla
 public class Noticia {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)  //el valor de pk es automatica. IDENTITY es para mysql
 	private int id;
 	private String titulo;
 	private Date fecha;
