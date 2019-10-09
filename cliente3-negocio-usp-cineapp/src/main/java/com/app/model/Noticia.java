@@ -22,7 +22,7 @@ public class Noticia {
 	
 	public Noticia() {		
 		
-		System.out.println("Constructo Noticia");
+		//System.out.println("Constructo Noticia");
 		
 		this.fecha = new Date();
 		this.estatus = "Activa";
