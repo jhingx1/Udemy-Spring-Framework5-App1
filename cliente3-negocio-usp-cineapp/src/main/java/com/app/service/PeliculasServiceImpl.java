@@ -23,7 +23,7 @@ public class PeliculasServiceImpl implements IPeliculasService{
 		
 
 		try {
-			lista = new LinkedList<>();
+			lista = new LinkedList<Pelicula>();
 
 			Pelicula pelicula1 = new Pelicula();
 			pelicula1.setId(1);
