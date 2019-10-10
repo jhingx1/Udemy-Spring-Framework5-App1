@@ -1,33 +1,30 @@
-package com.app.crudrepo;
+package com.app.testjparepo;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Sort;
 
 import com.app.model.Noticia;
 import com.app.repository.NoticiasRepository;
 
-
-
-public class AppFindAllById {
+public class AppSorting {
 
 	public static void main(String[] args) {
 		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");		
 		NoticiasRepository repo = context.getBean("noticiasRepository", NoticiasRepository.class);
 		
-		//recuperar varios registros por id
-		List<Integer> ids = new LinkedList<>(); //list: internamente implementa a iterable
-		ids.add(3);
-		ids.add(4);
-		ids.add(5);
+		//obtener todas las entidades ordenadas por un campo
+		//List<Noticia> lista = repo.findAll(Sort.by("titulo").descending());
+				
+		//Ordenas por dos o mas atributos
+		List<Noticia> lista = repo.findAll(Sort.by("fecha").descending().and(Sort.by("titulo").ascending()));
 		
-		Iterable<Noticia> it = repo.findAllById(ids);
-		for(Noticia n:it)
+		for(Noticia n:lista)
 			System.out.println(n);
 		
-		context.close();		
+		context.close();
 
 	}
 

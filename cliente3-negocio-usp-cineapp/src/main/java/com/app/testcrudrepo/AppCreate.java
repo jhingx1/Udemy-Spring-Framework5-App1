@@ -1,19 +1,23 @@
-package com.app.crudrepo;
+package com.app.testcrudrepo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.app.model.Noticia;
 import com.app.repository.NoticiasRepository;
 
-
-public class AppConexion {
+public class AppCreate {
 
 	public static void main(String[] args) {
 		
+		Noticia noticia = new Noticia();
+		noticia.setTitulo("Proximo Estreno : Juego Macabro XI");
+		noticia.setDetalle("Esto es una prueba de insercion de datos");
+				
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
 		
 		NoticiasRepository repo = context.getBean("noticiasRepository", NoticiasRepository.class);
 		
-		System.out.println("Total de Noticias : " + repo.count());
+		repo.save(noticia);
 		
 		context.close();
 
