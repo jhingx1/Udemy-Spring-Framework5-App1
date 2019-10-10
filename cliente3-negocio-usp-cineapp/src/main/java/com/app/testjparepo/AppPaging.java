@@ -24,8 +24,7 @@ public class AppPaging {
 		
 		for(Noticia n:page)
 			System.out.println(n);
-		
-		
+				
 		context.close();
 	}
 }
