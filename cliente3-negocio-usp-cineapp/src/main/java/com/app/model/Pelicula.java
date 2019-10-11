@@ -1,9 +1,25 @@
 package com.app.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="peliculas")
 public class Pelicula {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //marcar como autoingremental
 	private int id;
 	private String titulo;
 	private int duracion=100;
@@ -13,8 +29,23 @@ public class Pelicula {
 	private Date fechaEstreno;
 	private String estatus = "Activa"; //activa por defautl
 	
-	private Detalle detalle;
+	//@Transient para decir que no sea persistente y no lo recuperara
+	@OneToOne
+	@JoinColumn(name="idDetalle") //llave forenea
+	private Detalle detalle; //en la tabla es: idDetalle es diferente. agregar la anotacion
 	
+	//varias entidades de tipo horario
+	@OneToMany(mappedBy="pelicula",fetch=FetchType.EAGER)
+	private List<Horario> horarios;
+		
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(List<Horario> horarios) {
+		this.horarios = horarios;
+	}
+
 	public Detalle getDetalle() {
 		return detalle;
 	}
