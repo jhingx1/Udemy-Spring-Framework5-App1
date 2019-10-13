@@ -6,16 +6,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.model.Banner;
+import com.app.model.Horario;
 import com.app.model.Pelicula;
 import com.app.service.IBannersService;
+import com.app.service.IHorariosService;
 import com.app.service.IPeliculasService;
 import com.app.util.Utileria;
 
@@ -27,6 +32,9 @@ public class HomeController {
 	
 	@Autowired
 	private IBannersService serviceBanners;
+	
+	@Autowired
+	private IHorariosService serviceHorarios;
 	
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 	
@@ -43,7 +51,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/detail",method=RequestMethod.GET)
 	public String mostrarDetalle(Model model,@RequestParam("idMovie") int idPelicula,
-			@RequestParam("fecha") String fecha) {
+			@RequestParam("fecha") Date fecha) {
 		
 //		System.out.println("idPelicula : " + idPelicula);
 //		System.out.println("Buscando horarios pelicula : " + fecha);
@@ -58,12 +66,25 @@ public class HomeController {
 //		model.addAttribute("duracion", duracion);
 //		model.addAttribute("precioEntrada", precioEntrada);
 		
+		List<Horario> horarios = serviceHorarios.buscarPorIdPelicula(idPelicula, fecha);
+		model.addAttribute("horarios", horarios);
+		
+		//fecha que selecciono el usuario
+		model.addAttribute("fechaBusqueda", dateformat.format(fecha));
+		
 		//uso de service
 		model.addAttribute("pelicula", servicePeliculas.buscarPorId(idPelicula));
 		
 		//regresando el nombre de la vista
 		return "detalle";
 		
+	}
+	
+	//para redefinir la fecha del sistema
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 	
 	@RequestMapping(value="/search",method=RequestMethod.POST)
