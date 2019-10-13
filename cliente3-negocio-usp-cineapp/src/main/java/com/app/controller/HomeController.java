@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.model.Banner;
 import com.app.model.Horario;
+import com.app.model.Noticia;
 import com.app.model.Pelicula;
 import com.app.service.IBannersService;
 import com.app.service.IHorariosService;
+import com.app.service.INoticiasService;
 import com.app.service.IPeliculasService;
 import com.app.util.Utileria;
 
@@ -35,6 +38,9 @@ public class HomeController {
 	
 	@Autowired
 	private IHorariosService serviceHorarios;
+	
+	@Autowired
+	private INoticiasService serviceNoticias; //
 	
 	private SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 	
@@ -132,5 +138,10 @@ public class HomeController {
 		return "home";
 	}
 	
+	//Metodo para buscar las 3 ultimas noticas
+	@ModelAttribute("noticias")
+	public List<Noticia> getNoticias(){
+		return serviceNoticias.buscarUltimas();
+	}
 	
 }
