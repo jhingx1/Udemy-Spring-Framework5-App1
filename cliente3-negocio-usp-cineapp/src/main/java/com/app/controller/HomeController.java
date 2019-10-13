@@ -24,6 +24,7 @@ public class HomeController {
 	
 	@Autowired //para inyectar el servicio
 	private IPeliculasService servicePeliculas;
+	
 	@Autowired
 	private IBannersService serviceBanners;
 	
@@ -44,18 +45,18 @@ public class HomeController {
 	public String mostrarDetalle(Model model,@RequestParam("idMovie") int idPelicula,
 			@RequestParam("fecha") String fecha) {
 		
-		System.out.println("idPelicula : " + idPelicula);
-		System.out.println("Buscando horarios pelicula : " + fecha);
+//		System.out.println("idPelicula : " + idPelicula);
+//		System.out.println("Buscando horarios pelicula : " + fecha);
 		
 		//TODO buscar en la DB los horarios
 		
-		String tituloPelicula = "Rapidos y Furiosos";
-		int duracion = 136;
-		double precioEntrada = 50;
-		
-		model.addAttribute("titulo", tituloPelicula);
-		model.addAttribute("duracion", duracion);
-		model.addAttribute("precioEntrada", precioEntrada);
+//		String tituloPelicula = "Rapidos y Furiosos";
+//		int duracion = 136;
+//		double precioEntrada = 50;
+//		
+//		model.addAttribute("titulo", tituloPelicula);
+//		model.addAttribute("duracion", duracion);
+//		model.addAttribute("precioEntrada", precioEntrada);
 		
 		//uso de service
 		model.addAttribute("pelicula", servicePeliculas.buscarPorId(idPelicula));

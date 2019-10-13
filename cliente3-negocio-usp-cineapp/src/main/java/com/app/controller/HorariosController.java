@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.model.Horario;
 import com.app.model.Pelicula;
+import com.app.service.IPeliculasService;
 import com.app.service.PeliculasServiceImpl;
 
 @Controller
@@ -26,7 +27,7 @@ import com.app.service.PeliculasServiceImpl;
 public class HorariosController {
 	
 	@Autowired	
-	private PeliculasServiceImpl servicePeliculas;
+	private IPeliculasService servicePeliculas;
 		
 	/**
 	 * Metodo para mostrar el formulario para crear un nuevo horario
@@ -39,7 +40,7 @@ public class HorariosController {
 		List<Pelicula> listaPeliculas = servicePeliculas.buscarTodas();
 					
 		// Ejercicio: agregar al modelo listado de peliculas
-		model.addAttribute("peliculas", listaPeliculas);
+		//model.addAttribute("peliculas", listaPeliculas);
 		
 		// Ejercicio: crear archivo formHorario.jsp y configurar el diseño utilizando el codigo HTML
 		// del archivo formHorario.html de la plantilla (utilizar Form Tag Library)
@@ -59,7 +60,7 @@ public class HorariosController {
 		// Ejercicio: Verificar si hay errores en el Data Binding
 		if (result.hasErrors()) {
 			List<Pelicula> listaPeliculas = servicePeliculas.buscarTodas();
-			model.addAttribute("peliculas", listaPeliculas);
+			//model.addAttribute("peliculas", listaPeliculas);
 			return "horarios/formHorario";
 		}
 		

@@ -83,4 +83,20 @@ public class Utileria {
 		return builder.toString();
 	}
 	
+	/**
+	 * Funcion que elimina un archivo dada una ruta
+	 * @param ruta
+	 * @return true|false si se elimino o no
+	 */
+	public static boolean eliminarArchivo(String ruta) {
+		//Le mandas como parametro la ruta completa del archivo a eliminar.
+		File archivo =  new File(ruta);
+	    if (!archivo.exists()) {
+	        return false;
+	    } else {
+	    	return archivo.delete();
+	    }
+	}
+	
+	
 }

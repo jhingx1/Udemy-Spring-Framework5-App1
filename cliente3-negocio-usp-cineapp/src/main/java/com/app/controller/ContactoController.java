@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.model.Contacto;
+import com.app.service.IPeliculasService;
 import com.app.service.PeliculasServiceImpl;
 
 @Controller
 public class ContactoController {
 	
 	@Autowired	
-	private PeliculasServiceImpl servicePeliculas;	
+	private IPeliculasService servicePeliculas;	
 	
 	@GetMapping(value="/contacto")
 	public String mostrarFormulario(@ModelAttribute("instanciaContacto") Contacto contacto,Model model) {
 			
-		model.addAttribute("generos",servicePeliculas.buscarGeneros());
+		//model.addAttribute("generos",servicePeliculas.buscarGeneros());
 		model.addAttribute("tipos", tipoNotificaciones());
 		return "formContacto";
 	}
