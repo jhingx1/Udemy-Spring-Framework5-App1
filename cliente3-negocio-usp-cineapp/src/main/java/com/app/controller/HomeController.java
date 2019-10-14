@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -120,21 +121,33 @@ public class HomeController {
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		
-		//para las fechas
-		List<String> listaFechas = Utileria.getNextDays(4); //por ser un metodo statico
-		System.out.println(listaFechas);
 		
-		List<Pelicula> peliculas = servicePeliculas.buscarTodas();				
-		
-		model.addAttribute("peliculas", peliculas);		
-		model.addAttribute("fechaBusqueda", dateformat.format(new Date()));		
-		
-		//agregando las lista de fechas al modelo
-		model.addAttribute("fechas", listaFechas);
-		
-		//banners
-		model.addAttribute("banners", serviceBanners.buscarTodos());
-				
+		try {
+			//
+			Date fechaSinHora = dateformat.parse(dateformat.format(new Date()));
+			
+			//para las fechas
+			List<String> listaFechas = Utileria.getNextDays(4); //por ser un metodo statico
+			System.out.println(listaFechas);
+			
+			//se va reemplazar para que filtre solo peliculas activas y con horario
+			//List<Pelicula> peliculas = servicePeliculas.buscarTodas();
+			List<Pelicula> peliculas = servicePeliculas.buscarPorFecha(fechaSinHora);
+			
+			//agregando las lista de fechas al modelo
+			model.addAttribute("fechas", listaFechas);
+			
+			model.addAttribute("fechaBusqueda", dateformat.format(new Date()));
+			
+			model.addAttribute("peliculas", peliculas);
+			
+			//banners
+			model.addAttribute("banners", serviceBanners.buscarTodos());
+			
+		} catch (ParseException e) {
+			System.out.println("Error: HomeController.mostrarPrincipal" + e.getMessage());
+		}
+			
 		return "home";
 	}
 	

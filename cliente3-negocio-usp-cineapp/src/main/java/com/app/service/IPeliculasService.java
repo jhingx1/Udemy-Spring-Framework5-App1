@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -23,7 +24,13 @@ public interface IPeliculasService {
 	
 	void eliminar(int idPelicula);
 	
-	//sobrecargado
+	//sobrecargado - para la paginacion
 	public Page<Pelicula> buscarTodas(Pageable page);
+	
+	//buscar peliculas activas
+	List<Pelicula> buscarActivas();
+	
+	//Este metodo busca por fecha y estado se refleja en el repository HorariosRepository
+	List<Pelicula> buscarPorFecha(Date fecha);
 
 }

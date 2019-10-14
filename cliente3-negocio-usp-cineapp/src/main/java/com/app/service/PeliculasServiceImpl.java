@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -143,6 +144,18 @@ public class PeliculasServiceImpl implements IPeliculasService{
 
 	@Override
 	public Page<Pelicula> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pelicula> buscarActivas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pelicula> buscarPorFecha(Date fecha) {
 		// TODO Auto-generated method stub
 		return null;
 	}
