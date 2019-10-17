@@ -78,7 +78,7 @@
             </div>
 
             <div class="form-group">
-               <label class="col-sm-2 control-label">Te gustaría recibir notificaciones de:</label>
+               <label class="col-sm-2 control-label">Te gustaria recibir notificaciones de:</label>
                <div class="col-sm-10">
                	<form:checkboxes items="${tipos}" path="notificaciones"/>
                   
@@ -103,7 +103,7 @@
          <hr class="featurette-divider">
 
          <!-- FOOTER -->
-     	<jsp:include page="includes/footer.jsp"></jsp:include>
+     	 <jsp:include page="includes/footer.jsp"></jsp:include>
 
       </div> <!-- /container -->
 
@@ -111,6 +111,6 @@
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-      <script src="${urlPublic}/bootstrap/js/bootstrap.min.js"></script> 		
+      <script src="${urlPublic}/bootstrap/js/bootstrap.min.js"></script>		
    </body>
 </html>
