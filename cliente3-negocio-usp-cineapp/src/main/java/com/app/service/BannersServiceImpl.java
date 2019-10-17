@@ -3,12 +3,9 @@ package com.app.service;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.app.model.Banner;
 
-@Service
+//@Service
 public class BannersServiceImpl implements IBannersService {
 
 	private List<Banner> lista = null; 
@@ -88,6 +85,12 @@ public class BannersServiceImpl implements IBannersService {
 		// Ejercicio: Implementar metodo			
 		return lista;
 		
+	}
+
+	@Override
+	public List<Banner> buscarActivos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

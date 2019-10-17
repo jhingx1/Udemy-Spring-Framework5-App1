@@ -7,5 +7,6 @@ public interface IBannersService {
 
 	void insertar(Banner banner); 
 	List<Banner> buscarTodos();
+	List<Banner> buscarActivos();
 	
 }

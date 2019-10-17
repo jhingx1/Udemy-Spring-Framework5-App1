@@ -119,9 +119,9 @@ public class HomeController {
 			model.addAttribute("fechas", listaFechas);
 			
 			//banners - Para la pagina principal
-			List<Banner> banners = serviceBanners.buscarTodos();
+			//List<Banner> banners = serviceBanners.buscarTodos();
 			//banners-pagina principal
-			model.addAttribute("banners", banners);
+			//model.addAttribute("banners", banners);
 			
 		} catch (ParseException e) {
 			System.out.println("Error: HomeController.buscar" + e.getMessage());
@@ -155,7 +155,7 @@ public class HomeController {
 			model.addAttribute("peliculas", peliculas);
 			
 			//banners
-			model.addAttribute("banners", serviceBanners.buscarTodos());
+			//model.addAttribute("banners", serviceBanners.buscarTodos());
 			
 		} catch (ParseException e) {
 			System.out.println("Error: HomeController.mostrarPrincipal" + e.getMessage());
@@ -168,6 +168,12 @@ public class HomeController {
 	@ModelAttribute("noticias")
 	public List<Noticia> getNoticias(){
 		return serviceNoticias.buscarUltimas();
+	}
+	
+	@ModelAttribute("banners")
+	public List<Banner> getBanners(){
+		return serviceBanners.buscarActivos();
+
 	}
 	
 }

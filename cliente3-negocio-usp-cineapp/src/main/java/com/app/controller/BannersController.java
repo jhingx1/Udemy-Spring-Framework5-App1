@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.model.Banner;
-import com.app.service.BannersServiceImpl;
+import com.app.service.IBannersService;
 import com.app.util.Utileria;
 
 @Controller
@@ -25,7 +25,7 @@ public class BannersController {
 
 	// Ejercicio: Inyectar instancia de la clase de servicio
 	@Autowired
-	private BannersServiceImpl serviceBanners;
+	private IBannersService serviceBanners;
 		
 	/**
 	 * Metodo para mostrar el listado de banners
