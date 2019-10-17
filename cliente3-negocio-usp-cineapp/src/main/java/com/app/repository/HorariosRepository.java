@@ -23,8 +23,8 @@ public interface HorariosRepository extends JpaRepository<Horario, Integer> {
 		group by h.idPelicula
 		order by p.id asc;
 		
-		notar que la anotacion Query usa los atributos de la clase horario para hacer la consulta. p es el atributo Pelicula que 
-		esta en el modelo-clase horario.
+		notar que la anotacion Query usa los atributos de la clase horario para hacer la consulta. p es 
+		el atributo Pelicula que esta en el modelo-clase horario.
 	 *  
 	 */
 	@Query("select h from Horario h where h.fecha = :fecha and pelicula.estatus='Activa' group by h.pelicula order by pelicula.id asc")

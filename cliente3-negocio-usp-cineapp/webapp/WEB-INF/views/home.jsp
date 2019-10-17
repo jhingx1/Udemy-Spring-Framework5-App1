@@ -106,7 +106,7 @@
                 <c:forEach items="${fechas}" var="fecha">
                 
           			<c:choose>
-			  		   <c:when test="${fechaBusqueda eq fecha}" >
+			  		   <c:when test="${fechaBusqueda eq fecha}" > <!-- para mantener la fecha de hoy -->
 						  <option value="${fecha}" selected>${fecha}</option>	
 					   </c:when>
 					   <c:otherwise>

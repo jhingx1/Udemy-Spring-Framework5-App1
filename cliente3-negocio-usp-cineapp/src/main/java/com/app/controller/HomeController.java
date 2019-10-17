@@ -94,26 +94,38 @@ public class HomeController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 	
+	//Metodo para buscar las peliculas por fecha
 	@RequestMapping(value="/search",method=RequestMethod.POST)
-	public String buscar(@RequestParam("fecha") String fecha,Model model) {
-		
-		System.out.println("Buscando fecha peliculas:" + fecha);
-		
-		//para las fechas
-		List<String> listaFechas = Utileria.getNextDays(4); 		
-		List<Pelicula> peliculas = servicePeliculas.buscarTodas();
-		
-		//banners - Para la pagina principal
-		List<Banner> banners = serviceBanners.buscarTodos();
+	public String buscar(@RequestParam("fecha") Date fecha,Model model) { //
 		
 		
-		model.addAttribute("peliculas", peliculas);
-		model.addAttribute("fechaBusqueda", fecha); //Mostrar la fecha seleccionada		
-		//agregando las lista de fechas al modelo
-		model.addAttribute("fechas", listaFechas);
-		
-		//banners-pagina principal
-		model.addAttribute("banners", banners);
+		//tambien usaremos el metodo buscarPorFecha
+		try {
+			//formato de fecha sin hora
+			Date fechaSinHora = dateformat.parse(dateformat.format(fecha));
+			
+			System.out.println("Buscando fecha peliculas:" + fecha);	
+			//para las fechas
+			List<String> listaFechas = Utileria.getNextDays(4);
+			
+			// Regresamos la fecha que selecciono el usuario con el mismo formato
+			model.addAttribute("fechaBusqueda", dateformat.format(fecha)); //Mostrar la fecha seleccionada	
+			
+			//reemplazado por buscarPorFecha
+			//List<Pelicula> peliculas = servicePeliculas.buscarTodas();
+			List<Pelicula> peliculas  = servicePeliculas.buscarPorFecha(fechaSinHora);
+			model.addAttribute("peliculas", peliculas);
+			//agregando las lista de fechas al modelo
+			model.addAttribute("fechas", listaFechas);
+			
+			//banners - Para la pagina principal
+			List<Banner> banners = serviceBanners.buscarTodos();
+			//banners-pagina principal
+			model.addAttribute("banners", banners);
+			
+		} catch (ParseException e) {
+			System.out.println("Error: HomeController.buscar" + e.getMessage());
+		}
 		
 		return "home";
 	}
@@ -123,10 +135,10 @@ public class HomeController {
 		
 		
 		try {
-			//
+			//vamos a ponerlo como variable de clase
 			Date fechaSinHora = dateformat.parse(dateformat.format(new Date()));
 			
-			//para las fechas
+			//para las fechas:lista de fechas a mostrar
 			List<String> listaFechas = Utileria.getNextDays(4); //por ser un metodo statico
 			System.out.println(listaFechas);
 			
@@ -137,6 +149,7 @@ public class HomeController {
 			//agregando las lista de fechas al modelo
 			model.addAttribute("fechas", listaFechas);
 			
+			//para comparar con la fecha de hoy
 			model.addAttribute("fechaBusqueda", dateformat.format(new Date()));
 			
 			model.addAttribute("peliculas", peliculas);
