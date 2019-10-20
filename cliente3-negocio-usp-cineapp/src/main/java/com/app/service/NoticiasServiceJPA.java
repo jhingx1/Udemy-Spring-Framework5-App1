@@ -24,6 +24,11 @@ public class NoticiasServiceJPA implements INoticiasService{
 		List<Noticia> noticias = noticiasRepo.findTop3ByEstatusOrderByIdDesc("Activa");		
 		return noticias;
 	}
+
+	@Override
+	public List<Noticia> buscarTodos() {
+		return noticiasRepo.findAll();
+	}
 	
 	
 }

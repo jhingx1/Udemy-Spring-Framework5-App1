@@ -25,6 +25,12 @@ public class NoticiasServiceImpl implements INoticiasService{
 		return null;
 	}
 
+	@Override
+	public List<Noticia> buscarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

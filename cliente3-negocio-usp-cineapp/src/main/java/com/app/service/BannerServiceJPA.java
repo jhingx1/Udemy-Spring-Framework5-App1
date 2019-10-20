@@ -22,13 +22,13 @@ public class BannerServiceJPA implements IBannersService{
 
 	@Override
 	public List<Banner> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		//para la vista listar todos los banners
+		return bannersRepo.findAll();
 	}
 
 	@Override
 	public List<Banner> buscarActivos() {		
-
+		//metodo para mostrar en la pagina principal - solo los activos
 		return bannersRepo.findByEstatusOrderByIdDesc("Activo");
 	}
 

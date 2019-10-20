@@ -6,8 +6,8 @@ import com.app.model.Noticia;
 
 public interface INoticiasService {
 
-	void guardar(Noticia noticia);
-	
-	List<Noticia> buscarUltimas();
+	void guardar(Noticia noticia);	
+	List<Noticia> buscarUltimas(); //busca las ultimas noticias
+	List<Noticia> buscarTodos();
 	
 }

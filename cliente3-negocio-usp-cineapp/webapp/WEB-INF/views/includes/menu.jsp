@@ -16,7 +16,9 @@
 <%--        	 <li><a href="${urlRoot}peliculas/index">Peliculas</a></li>  --%>
        	 
        	 <li><a href="${urlRoot}peliculas/indexPaginate?page=0">Peliculas</a></li>       	 
-       	 <li><a href="${urlRoot}banners/index">Banners</a></li>     
+       	 <li><a href="${urlRoot}banners/index">Banners</a></li>
+       	 <li><a href="${urlRoot}horarios/indexPaginate?page=0">Horarios</a></li>
+       	 <li><a href="${urlRoot}noticias/index">Noticias</a></li>
          <li><a href="${urlRoot}about">Acerca</a></li>
          <li><a href="#">Login</a></li>            
        </ul>

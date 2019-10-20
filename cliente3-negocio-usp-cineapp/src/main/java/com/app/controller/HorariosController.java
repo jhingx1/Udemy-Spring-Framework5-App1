@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.app.model.Banner;
 import com.app.model.Horario;
 import com.app.model.Pelicula;
+import com.app.service.IHorariosService;
 import com.app.service.IPeliculasService;
 import com.app.service.PeliculasServiceImpl;
 
@@ -28,6 +32,23 @@ public class HorariosController {
 	
 	@Autowired	
 	private IPeliculasService servicePeliculas;
+	
+	@Autowired
+	private IHorariosService serviceHorarios;
+	
+	
+	/**
+	 * Metodo para mostrar el listado de horarios
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/index")
+	public String mostrarIndex(Model model) { //mostrar lista de peliculas sin paginar
+		
+		List<Horario> listaHorarios = serviceHorarios.buscarTodos();
+		model.addAttribute("horarios", listaHorarios);
+		return "horarios/listHorarios";
+	}
 		
 	/**
 	 * Metodo para mostrar el formulario para crear un nuevo horario
@@ -80,5 +101,13 @@ public class HorariosController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
+	
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		Page<Horario> lista = serviceHorarios.buscarTodos(page);
+		model.addAttribute("horarios",lista);
+		return "horarios/listHorarios";
+	}
+	
 	
 }

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.app.model.Horario;
@@ -21,5 +23,18 @@ public class HorariosServiceJPA implements IHorariosService{
 		return horariosRepo.findByPelicula_IdAndFechaOrderByHora(idPelicula, fecha);
 		
 	}
+
+	@Override
+	public List<Horario> buscarTodos() {
+		//findAll : es un metodo predeterminado - pero es necesario crear el repositorio
+		return horariosRepo.findAll(); 
+	}
+
+	@Override
+	public Page<Horario> buscarTodos(Pageable page) { //listado paginado
+		return horariosRepo.findAll(page);
+	}
+
 	
+
 }
