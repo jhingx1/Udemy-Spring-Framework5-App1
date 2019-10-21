@@ -9,9 +9,11 @@ import org.springframework.data.domain.Pageable;
 import com.app.model.Horario;
 
 public interface IHorariosService {
-
-	List<Horario> buscarPorIdPelicula(int idPelicula,Date fecha); //
+	//busqueda pelicula por fecha
+	List<Horario> buscarPorIdPelicula(int idPelicula,Date fecha);
 	List<Horario> buscarTodos(); //lista de peliculas
 	Page<Horario> buscarTodos(Pageable page);
-
+	void insertar(Horario horario);
+	Horario buscarPorId(int idHorario);
+	void eliminar(int idHorario);
 }

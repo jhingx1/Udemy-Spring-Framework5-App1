@@ -46,7 +46,7 @@
 					<div class="col-sm-3">
 						<div class="form-group">
 							<label for="idPelicula" class="control-label">Pelicula</label>              
-							
+							<form:hidden path="id"/>
 							<form:select path="pelicula.id" items="${peliculas}" itemValue="id" itemLabel="titulo" />
 							             
 						</div> 

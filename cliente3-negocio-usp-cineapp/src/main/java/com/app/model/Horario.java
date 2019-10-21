@@ -23,9 +23,10 @@ public class Horario {
 	private String sala; 
 	private double precio;
 	
+	// Relacion Muchos a Uno -> Muchos horarios para una pelicula
 	//@Transient
 	@ManyToOne
-	@JoinColumn(name="idPelicula")
+	@JoinColumn(name="idPelicula") // foreignKey en la tabla de Horarios
 	private Pelicula pelicula;
 
 	public Horario() { }

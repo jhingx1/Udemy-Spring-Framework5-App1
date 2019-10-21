@@ -34,7 +34,11 @@
 
       <h3>Listado de Horarios</h3>
       
-      <a href="#" class="btn btn-success" role="button" title="Nueva Horario" >Nuevo</a><br><br>
+       <c:if test="${msg !=null }">        
+       		<div class='alert alert-success' role='alert'>${msg}</div>
+       </c:if>
+      
+      <a href="${urlForm}" class="btn btn-success" role="button" title="Nueva Horario" >Nuevo</a><br><br>
 	
       <div class="table-responsive">
         <table class="table table-hover table-striped table-bordered">
@@ -58,8 +62,8 @@
 		                <td>${horario.sala}</td>
 		                <td>${horario.precio}</td>		                             
 		                <td>
-							<a href="#" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
-							<a href="#" class="btn btn-danger btn-sm" role="button" title="Delete" ><span class="glyphicon glyphicon-trash"></span></a>
+							<a href="${urlEdit}/${horario.id}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+							<a href="${urlDelete}/${horario.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Delete" ><span class="glyphicon glyphicon-trash"></span></a>
 						</td>
 		            </tr>
            		</c:forEach>

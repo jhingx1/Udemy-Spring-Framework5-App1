@@ -15,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,12 +56,14 @@ public class HorariosController {
 	 * @return
 	 */
 	@GetMapping(value = "/create")
-	public String crear(@ModelAttribute Horario horario, Model model) {
+	public String crear(@ModelAttribute Horario horario) { //,Model model
 		
 		// Ejercicio: Recuperar lista de peliculas para poblar <select>
-		List<Pelicula> listaPeliculas = servicePeliculas.buscarTodas();
+		//reemplazado por el metodo
+		//List<Pelicula> listaPeliculas = servicePeliculas.buscarTodas();
 					
 		// Ejercicio: agregar al modelo listado de peliculas
+		//reemplazado por el metodo
 		//model.addAttribute("peliculas", listaPeliculas);
 		
 		// Ejercicio: crear archivo formHorario.jsp y configurar el diseño utilizando el codigo HTML
@@ -80,8 +83,9 @@ public class HorariosController {
 		
 		// Ejercicio: Verificar si hay errores en el Data Binding
 		if (result.hasErrors()) {
-			List<Pelicula> listaPeliculas = servicePeliculas.buscarTodas();
-			//model.addAttribute("peliculas", listaPeliculas);
+			//List<Pelicula> listaPeliculas = servicePeliculas.buscarTodas();
+			List<Pelicula> listaPeliculas = servicePeliculas.buscarActivas();
+			model.addAttribute("peliculas", listaPeliculas);
 			return "horarios/formHorario";
 		}
 		
@@ -89,9 +93,15 @@ public class HorariosController {
 		// que ya debera de tener los datos del formulario
 		
 		System.out.println("Objeto horario : " +  horario);
+		
+		serviceHorarios.insertar(horario);
+		attributes.addFlashAttribute("msg", "El Horario fue guardado");
 				
-		// De momento, hacemos un redirect al mismo formulario 
-		return "redirect:/horarios/create";
+		// De momento, hacemos un redirect al mismo formulario
+		//Horario paginado
+		//return "redirect:/horarios/create";
+		
+		return "redirect:/horarios/indexPaginate";
 	}
 	
 	// Ejercicio: Crear metodo para personalizar el Data Binding para las todas las propiedades de tipo Date	
@@ -107,6 +117,36 @@ public class HorariosController {
 		Page<Horario> lista = serviceHorarios.buscarTodos(page);
 		model.addAttribute("horarios",lista);
 		return "horarios/listHorarios";
+	}
+	
+	/**
+	 * Metodo que muestra el formulario para editar un horario
+	 * @param idHorario
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping(value="/edit/{id}")
+	public String editar(@PathVariable("id") int idHorario,Model model) {
+		
+		Horario horario = serviceHorarios.buscarPorId(idHorario);
+		model.addAttribute("horario", horario);
+		return "horarios/formHorario";
+		
+	}
+	
+	//Para no añadir peliculas al modelo
+	@ModelAttribute("peliculas")
+	public List<Pelicula> getPeliculas(){		
+		return servicePeliculas.buscarActivas(); 
+	}
+	
+	@GetMapping(value="/delete/{id}")
+	public String eliminar(@PathVariable("id") int idHorario,RedirectAttributes attributes) {			
+		serviceHorarios.eliminar(idHorario);					
+		attributes.addFlashAttribute("msg","La Pelicula fue eliminada");				
+		//return "redirect:/horarios/index";
+		return "redirect:/horarios/indexPaginate";
 	}
 	
 	
