@@ -16,6 +16,9 @@
     <!-- Ruta relativa nuestros recursos -->
 	<spring:url value="/resources" var="urlPublic" />
 	<spring:url value="/noticias/create" var="urlForm" />
+	<spring:url value="/noticias/edit" var="urlEdit" />
+	<spring:url value="/noticias/delete" var="urlDelete" /> 
+	<spring:url value="/noticias" var="urlHorarios" />
 	
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -32,7 +35,11 @@
 
       <h3>Listado de Noticias</h3>
       
-      <a href="#" class="btn btn-success" role="button" title="Nueva Pelicula" >Nueva</a><br><br>
+      <c:if test="${msg !=null }">        
+       		<div class='alert alert-success' role='alert'>${msg}</div>
+       </c:if>
+      
+      <a href="${urlForm}" class="btn btn-success" role="button" title="Nueva Pelicula" >Nueva</a><br><br>
 
       <div class="table-responsive">
         <table class="table table-hover table-striped table-bordered">
@@ -53,8 +60,8 @@
 		                <td><fmt:formatDate value="${noticia.fecha}" pattern="dd-MM-yyyy" /></td>            
 		                <td><span class="label label-success">${noticia.estatus}</span></td>
 		                <td>
-		                    <a href="#" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
-		                    <a href="#" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
+		                    <a href="${urlEdit}/${noticia.id}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+		                    <a href="${urlDelete}/${noticia.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
 		                </td>
 	            	</tr>
             	</c:forEach>	            	

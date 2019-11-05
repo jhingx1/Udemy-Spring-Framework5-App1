@@ -14,6 +14,6 @@ public interface IHorariosService {
 	List<Horario> buscarTodos(); //lista de peliculas
 	Page<Horario> buscarTodos(Pageable page);
 	void insertar(Horario horario);
-	Horario buscarPorId(int idHorario);
+	Horario buscarPorId(int idHorario); //editar
 	void eliminar(int idHorario);
 }

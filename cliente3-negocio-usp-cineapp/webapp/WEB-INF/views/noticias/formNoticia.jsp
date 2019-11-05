@@ -1,11 +1,8 @@
-<!DOCTYPE html>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- Tag para dar formato -->
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-   
-<!-- Para usar los recursos estaticos -->
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -18,6 +15,7 @@
 
     <!-- Ruta relativa nuestros recursos -->
 	<spring:url value="/resources" var="urlPublic" />
+	<spring:url value="/noticias/save" var="urlForm" />
 	
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -31,25 +29,35 @@
 
     <div class="container theme-showcase" role="main">
 
-      <h3 class="blog-title"><span class="label label-success">Datos de la Noticia</span></h3>
-
-	  <spring:url value="/noticias/save" var="urlForm"></spring:url>
+      <h3 class="blog-title"><span class="label label-success">Datos de la Noticia</span></h3>	 
+      
+       <spring:hasBindErrors name="noticia">
+		<div class='alert alert-danger' role='alert'>
+			Por favor corrija los siguientes errores:
+			<ul>
+				<c:forEach var="error" items="${errors.allErrors}">
+					<li><spring:message message="${error}" /></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</spring:hasBindErrors>
 	  
-      <form action="${urlForm}" method="post">
+      <form:form action="${urlForm}" modelAttribute="noticia" method="post">
         <div class="row">         
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="titulo">Titulo</label>             
-              <input type="text" class="form-control" name="titulo" id="titulo" required="required"/>
+              <label for="titulo">Titulo</label>       
+              <form:hidden path="id"/>       
+              <form:input type="text" class="form-control" path="titulo" id="titulo" required="required"/>
             </div>
           </div>
           <div class="col-sm-3">
             <div class="form-group">
               <label for="estatus">Estatus</label>             
-              <select id="estatus" name="estatus" class="form-control">
+              <form:select id="estatus" path="estatus" class="form-control">
                 <option value="Activa">Activa</option>
                 <option value="Inactiva">Inactiva</option>                
-              </select>  
+              </form:select>  
             </div>
           </div>
         </div>
@@ -57,13 +65,13 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="detalle">Detalles</label>             
-              <textarea class="form-control" name="detalle" id="detalle" rows="10"></textarea>
+              <form:textarea class="form-control" path="detalle" id="detalle" rows="10"></form:textarea>
             </div>  
           </div>
         </div>
 
         <button type="submit" class="btn btn-danger" >Guardar</button>
-      </form> 
+      </form:form> 
 
       <hr class="featurette-divider">
 

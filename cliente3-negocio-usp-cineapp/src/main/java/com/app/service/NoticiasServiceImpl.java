@@ -31,6 +31,18 @@ public class NoticiasServiceImpl implements INoticiasService{
 		return null;
 	}
 
+	@Override
+	public Noticia buscarPorId(int idHorario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminar(int idHorario) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

@@ -10,4 +10,8 @@ public interface INoticiasService {
 	List<Noticia> buscarUltimas(); //busca las ultimas noticias
 	List<Noticia> buscarTodos();
 	
+	Noticia buscarPorId(int idNoticia);
+	void eliminar(int idNoticia);
+	
+	
 }

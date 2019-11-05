@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class NoticiasServiceJPA implements INoticiasService{
 	
 	@Override
 	public void guardar(Noticia noticia) {		
-		
+		noticiasRepo.save(noticia);
 	}
 
 	@Override
@@ -28,6 +29,20 @@ public class NoticiasServiceJPA implements INoticiasService{
 	@Override
 	public List<Noticia> buscarTodos() {
 		return noticiasRepo.findAll();
+	}
+
+	@Override
+	public Noticia buscarPorId(int idNoticia) {
+		Optional<Noticia> optional = noticiasRepo.findById(idNoticia);
+		if(optional.isPresent())
+			return optional.get();
+		
+		return null;
+	}
+
+	@Override
+	public void eliminar(int idNoticia) {
+		noticiasRepo.deleteById(idNoticia);		
 	}
 	
 	
