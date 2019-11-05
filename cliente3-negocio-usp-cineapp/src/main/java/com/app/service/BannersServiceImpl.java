@@ -93,4 +93,16 @@ public class BannersServiceImpl implements IBannersService {
 		return null;
 	}
 
+	@Override
+	public Banner buscarPorId(int idBanner) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminar(int idBanner) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

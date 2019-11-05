@@ -9,4 +9,7 @@ public interface IBannersService {
 	List<Banner> buscarTodos();
 	List<Banner> buscarActivos();
 	
+	Banner buscarPorId(int idBanner);
+	void eliminar(int idBanner);
+	
 }

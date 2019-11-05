@@ -15,6 +15,9 @@
       <!-- Ruta relativa nuestros recursos -->
 	<spring:url value="/resources" var="urlPublic" />
 	<spring:url value="/banners/create" var="urlForm" />
+	<spring:url value="/banners/edit" var="urlEdit" />
+	<spring:url value="/banners/delete" var="urlDelete" /> 
+	<spring:url value="/banners" var="urlHorarios" />
 	
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -31,8 +34,8 @@
 
       <h3>Listado de imagenes del Banner</h3>
       
-      <c:if test="${mensaje!=null }">
-    	<div class='alert alert-success' role="alert">${mensaje}</div>
+      <c:if test="${msg!=null }">
+    	<div class='alert alert-success' role="alert">${msg}</div>
       </c:if>
       
       <a href="${urlForm}" class="btn btn-success" role="button" title="Nuevo Banner" >Nuevo</a><br><br>
@@ -69,8 +72,8 @@
 							</c:choose>
 						</td>
 						<td>
-		                    <a href="#" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
-		                    <a href="#" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
+		                    <a href="${urlEdit}/${banner.id}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+		                    <a href="${urlDelete}/${banner.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
 		                </td>											
 					</tr>
 				</c:forEach>

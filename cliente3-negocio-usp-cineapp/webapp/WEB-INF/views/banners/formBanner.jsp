@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,13 +30,39 @@
       <div class="container theme-showcase" role="main">
 
          <h3 class="blog-title"><span class="label label-success">Datos de la imagen</span></h3>
+         
+         <spring:hasBindErrors name="noticia">
+			<div class='alert alert-danger' role='alert'>
+				Por favor corrija los siguientes errores:
+				<ul>
+					<c:forEach var="error" items="${errors.allErrors}">
+						<li><spring:message message="${error}" /></li>
+					</c:forEach>
+				</ul>
+			</div>
+		</spring:hasBindErrors>
 
-         <form action="${urlForm}" method="post" enctype="multipart/form-data">
+         <form:form action="${urlForm}" method="post" modelAttribute="banner" enctype="multipart/form-data">
+            
+            <!-- Ya traemos el objeto banner, por lo tanto tambien traemos la imagen. Podemos aprovechar que ya traemos
+				la imagen del banner. La mostramos en un tag <img>. Solo llamamos ${banner.archivo}
+			-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<img class="img-responsive" src="${urlPublic}/images/${banner.archivo}" title="Vista preliminar">
+						</div>
+					</div>
+				</div>
+			</div>
+            
             <div class="row">         
                <div class="col-sm-6">
                   <div class="form-group">
-                     <label for="titulo">Titulo</label>             
-                     <input type="text" class="form-control" name="titulo" id="titulo" required="required"/>
+                     <label for="titulo">Titulo</label>
+                     <form:hidden path="id"/>               
+                     <form:input type="text" class="form-control" path="titulo" id="titulo" required="required"/>
                   </div>
                </div>
 
@@ -43,24 +70,35 @@
                <div class="col-sm-3">
                   <div class="form-group">
                      <label for="imagen">Imagen</label>
-                     <input type="file" id="archivoImagen" name="archivoImagen" required="required" />
-                     <p class="help-block">TamaÃ±o recomendado: 1140 x 250 </p>
+                     
+                     <c:choose>                     
+                     	<c:when test="${banner.id == 0}">
+                     		<input type="file" id="archivoImagen" name="archivoImagen" required="required"/>
+                     	</c:when>
+                     	<c:otherwise>
+                     		<input type="file" id="archivoImagen" name="archivoImagen"/>
+                     	</c:otherwise>                     
+                     </c:choose>
+                                                                                    
+                     <form:hidden path="archivo" />
+                     <p class="help-block">Tamaño recomendado: 1140 x 250 </p>
                   </div> 
                </div> 
 
                <div class="col-sm-3">
                   <div class="form-group">
                      <label for="estatus">Estatus</label>             
-                     <select id="estatus" name="estatus" class="form-control">
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>                
-                     </select>  
+                     <form:select id="estatus" path="estatus" class="form-control">
+                        <form:option value="Activo">Activo</form:option>
+                        <form:option value="Inactivo">Inactivo</form:option>                
+                     </form:select>  
                   </div>
                </div>
+               
             </div>
 
             <button type="submit" class="btn btn-danger" >Guardar</button>
-         </form> 
+         </form:form> 
 
          <hr class="featurette-divider">
 

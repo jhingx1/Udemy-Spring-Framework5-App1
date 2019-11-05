@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,7 @@ public class BannerServiceJPA implements IBannersService{
 
 	@Override
 	public void insertar(Banner banner) {
-		// TODO Auto-generated method stub
-		
+		bannersRepo.save(banner);
 	}
 
 	@Override
@@ -30,6 +30,20 @@ public class BannerServiceJPA implements IBannersService{
 	public List<Banner> buscarActivos() {		
 		//metodo para mostrar en la pagina principal - solo los activos
 		return bannersRepo.findByEstatusOrderByIdDesc("Activo");
+	}
+
+	@Override
+	public Banner buscarPorId(int idBanner) {
+		Optional<Banner> optional = bannersRepo.findById(idBanner);
+		if(optional.isPresent())
+			return optional.get();
+		
+		return null;
+	}
+
+	@Override
+	public void eliminar(int idBanner) {		
+		bannersRepo.deleteById(idBanner);
 	}
 
 }

@@ -55,8 +55,8 @@
             <div class="form-group">
               <label for="estatus">Estatus</label>             
               <form:select id="estatus" path="estatus" class="form-control">
-                <option value="Activa">Activa</option>
-                <option value="Inactiva">Inactiva</option>                
+                <form:option value="Activa">Activa</form:option>
+                <form:option value="Inactiva">Inactiva</form:option>                
               </form:select>  
             </div>
           </div>
