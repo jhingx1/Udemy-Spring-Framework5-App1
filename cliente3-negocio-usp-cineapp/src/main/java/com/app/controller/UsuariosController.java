@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.app.model.Perfil;
 import com.app.model.Usuario;
+import com.app.service.IPerfilesService;
+import com.app.service.IUsuariosService;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -17,6 +20,12 @@ public class UsuariosController {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private IUsuariosService serviceUsuarios;
+	
+	@Autowired
+	private IPerfilesService servicePerfiles;
 	
 	@GetMapping("/demo-bcrypt")
 	public String pruebaBcrypt() {
@@ -35,7 +44,26 @@ public class UsuariosController {
 	@PostMapping("/save")
 	public String guardar(@ModelAttribute Usuario usuario,@RequestParam("perfil") String perfil) {
 		System.out.println("Usuario " + usuario);
-		System.out.println("Perfil : " + perfil);
+		System.out.println("Perfil : " + perfil); //para luego guardar en la db
+		
+		//guardar objetos en la base de datos
+		String tmpPass = usuario.getPwd(); //regresa la contraseña
+		String encriptado = encoder.encode(tmpPass); //pass encriptado
+		
+		usuario.setPwd(encriptado); //cambiando la contraseña
+		usuario.setActivo(1); //para que el usuario este activado por default
+		
+		//en DB
+		serviceUsuarios.guardar(usuario);
+		
+		//para guardar un objeto de tipo perfil
+		Perfil perfilTmp = new Perfil();
+		perfilTmp.setCuenta(usuario.getCuenta());
+		perfilTmp.setPerfil(perfil);
+		
+		//en DB
+		servicePerfiles.guardar(perfilTmp);
+				
 		return "redirect:/usuarios/index";
 	}
 	

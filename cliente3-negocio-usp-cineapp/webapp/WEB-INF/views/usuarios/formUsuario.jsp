@@ -30,8 +30,7 @@
 							<label for="perfil" class="control-label">PERFIL</label>              
 							<select id="perfil" name="perfil" class="form-control">
 								<option value="GERENTE">GERENTE</option>
-								<option value="EDITOR">EDITOR</option>								
-								<option value="GERENTE">SUPERVISOR</option>								
+								<option value="EDITOR">EDITOR</option>																						
 							</select>             
 						</div> 
 					</div>
